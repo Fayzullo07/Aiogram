@@ -57,3 +57,10 @@
   width: 350px;
   margin-top: 10px;
 }
+
+.home__card {
+  max-width: 500px;
+  height: max-content;
+  margin: 30px auto;
+  padding: 20px;
+}
