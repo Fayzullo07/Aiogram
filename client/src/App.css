@@ -7,3 +7,18 @@
 .brand-logo {
   font-family: 'Grand Hotel', cursive;
 }
+
+.mycard {
+  margin-top: 30px;
+}
+
+.mycard h2 {
+  font-family: 'Grand Hotel', cursive;
+}
+
+.card__auth {
+  padding: 20px;
+  text-align: center;
+  max-width: 400px;
+  margin: 10px auto;
+}
