@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Poppins&family=Redressed&display=swap');
+
+.navBg a {
+  color: #000 !important;
+}
+
+.brand-logo {
+  font-family: 'Grand Hotel', cursive;
+}
