@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Poppins&family=Redressed&display=swap');
 
 .navBg a {
-  color: #000 !important;
+  color: #fff !important;
 }
 
 .brand-logo {
@@ -58,8 +58,14 @@
   margin-top: 10px;
 }
 
+.home {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 .home__card {
-  max-width: 500px;
+  max-width: 450px;
   height: max-content;
   margin: 30px auto;
   padding: 20px;

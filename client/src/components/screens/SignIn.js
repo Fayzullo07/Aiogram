@@ -2,15 +2,18 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./css/SignIn.css"
 import M from 'materialize-css';
+import Login from "./LoginPage/Login";
 
 export default function SignIn() {
     const [regName, setRegName] = useState("");
     const [regPassword, setRegPassword] = useState("");
     const [regEmail, setRegEmail] = useState("");
+    const [logEmail, setLogEmail] = useState("");
+    const [logPassword, setLogPassword] = useState("");
     const [clicked, setClicked] = useState(false);
 
     const postData = () => {
-      if(!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test()){
+      if(!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(regEmail)){
         M.toast({html: "Email manzilingizni to'g'ri kiriting", classes: "rounded #ff1744 red accent-3"});
         return
       }
@@ -39,19 +42,16 @@ export default function SignIn() {
         <section>
           <div className={clicked ? "container active": "container"}>
             <div className="user signinBx">
-              <div className="imgBx"><img src="https://images.unsplash.com/photo-1576859958081-27de5c70262a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80" alt="sign"/></div>
+              <div className="imgBx"><img src="https://images.unsplash.com/photo-1631624215749-b10b3dd7bca7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGhhY2tpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" alt="sign"/></div>
               <div className="formBx">
-                <div className="form">
-                  <h2>Kirish</h2>
-                  <input type="text" name="" placeholder="Ismingiz yoki Emailingiz" />
-                  <input type="password" name="" placeholder="Parolingiz" />
-                  <input type="submit" name="" value="Login" />
-                  <p className="signup">
-                    Accountingiz yo'qmi?<Link to="#" onClick={() => setClicked(!clicked)}>
-                      Ro'yhatdan o'tish
-                    </Link>
-                  </p>
-                </div>
+                <Login
+                  logEmail={logEmail}
+                  logPassword={logPassword}
+                  setLogEmail={setLogEmail}
+                  setLogPassword={setLogPassword}
+                  clicked={clicked}
+                  setClicked={setClicked}
+                />
               </div>
             </div>
             <div className="user signupBx">
@@ -68,7 +68,7 @@ export default function SignIn() {
                   </p>
                 </div>
               </div>
-              <div className="imgBx"><img src="https://images.unsplash.com/photo-1628972799193-1a6be77e183e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80" alt="sign"/></div>
+              <div className="imgBx"><img src="https://images.unsplash.com/photo-1635407640793-72dd329d218a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aGFja2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="sign"/></div>
             </div>
           </div>
         </section>
