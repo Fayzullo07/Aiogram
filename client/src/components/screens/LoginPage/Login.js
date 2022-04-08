@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {UserContext} from "../../../App"
 import M from "materialize-css";
+
 export default function Login(props) {
+    const {state, dispatch} = useContext(UserContext);
     const navigate = useNavigate();
     const {logEmail, logPassword, setLogEmail, setLogPassword, clicked, setClicked} = props;
 
@@ -25,6 +29,7 @@ export default function Login(props) {
           } else {
             localStorage.setItem("jwt", data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
+            dispatch({type: "USER", payload: data.user})
             M.toast({html: "Muvafiqiyatli kirish qildingiz", classes: "rounded #76ff03 light-green accent-3"});
             navigate("/")
           }
