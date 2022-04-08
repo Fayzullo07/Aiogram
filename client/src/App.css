@@ -96,3 +96,9 @@
   height: 350px;
   object-fit: cover top;
 }
+
+.moved_center {
+  position: absolute;
+  top: -12px;
+  left: 8px;
+}
