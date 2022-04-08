@@ -14,15 +14,23 @@ router.get("/allpost", (req, res) => {
 
 router.post("/createpost", login, (req, res) => {
     const {title, body, pic} = req.body;
-    if (!title || !body || !pic) {
-        return res.status(422).json({error: "Please add all the fields"});
+    if (!title) {
+        return res.status(422).json({error: "Title is empty"});
+    }
+
+    if (!body) {
+        return res.status(422).json({error: "Body is empty"});
+    }
+
+    if (!pic) {
+        return res.status(422).json({error: "Image is empty"});
     }
     
     req.user.password = undefined;
     const post = new Post({
         title,
         body,
-        pic,
+        photo: pic,
         postedBy: req.user
     });
     post.save().then((result) => {

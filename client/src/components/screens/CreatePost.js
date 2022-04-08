@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import M from "materialize-css";
 
@@ -9,40 +9,47 @@ export default function CreatePost() {
   const [image, setImage] = useState("");
   const [url, setUrl] = useState("");
 
+  useEffect(() => {
+    if(url) {
+      fetch("http://localhost:5001/createpost", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Fayzullo " + localStorage.getItem("jwt")
+        },
+        body: JSON.stringify({
+          title,
+          body,
+          pic: url
+        })
+      }).then(res => res.json()).then((data) => {
+        if (data.error) {
+          M.toast({html: data.error, classes: "rounded #ff1744 red accent-3"})
+        } else {
+          M.toast({html: "Maqola qo'shildi", classes: "rounded #76ff03 light-green accent-3"})
+          navigate("/")
+        }
+      })
+    }
+  }, [url])
+
   const postDetails = () => {
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "Fayzullo");
     data.append("cloud_name", "du5hfz4yk");
+
     fetch("https://api.cloudinary.com/v1_1/du5hfz4yk/image/upload", {
       method: "post",
       body: data
     }).then(res => res.json()).then((data) => {
       console.log(data)
-      setUrl(data.secure_url);
+      setUrl(data.url);
     }).catch((err) => {
       console.log(err)
     })
 
-    fetch("http://localhost:5001/createpost", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        title,
-        body,
-        pic: url
-      })
-    }).then(res => res.json()).then(() => {
-      console.log(data);
-      if (data.error) {
-        M.toast({html: data.error, classes: "rounded #ff1744 red accent-3"})
-      } else {
-        M.toast({html: data.msg, classes: "rounded #76ff03 light-green accent-3"})
-        navigate("/")
-      }
-    })
+
   }
 
   return (
