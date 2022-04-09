@@ -1,7 +1,7 @@
 .home {
     width: 100%;
     min-height: 90vh;
-    /* background: #555; */
+    background: #555;
 }
 
 .post__items {
@@ -12,7 +12,6 @@
 
 .left__side {
     min-height: 90vh;
-    background: #fff;
 }
 
 .home__card {

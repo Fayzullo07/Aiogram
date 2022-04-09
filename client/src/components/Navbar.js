@@ -1,8 +1,11 @@
 import { useContext } from "react";
 import {UserContext} from '../App.js'
 import { Link, Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 export default function Navbar() {
-    const {state} = useContext(UserContext);
+    const {state, dispatch} = useContext(UserContext);
+    const navigate = useNavigate();
 
     const renderNav = () => {
         if (state) {
@@ -10,6 +13,15 @@ export default function Navbar() {
                 <>
                     <li><Link to="/profile">Mening profilim</Link></li>
                     <li><Link to="/createpost">Maqola yozish</Link></li>
+                    <li>
+                        <button className="btn" onClick={() => {
+                            localStorage.clear();
+                            dispatch({type: "CLEAR"});
+                            navigate("/signin")
+                        }}>
+                            Chiqish
+                        </button>
+                    </li>
                 </>
             ]
         } else {
