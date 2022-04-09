@@ -58,18 +58,6 @@
   margin-top: 10px;
 }
 
-.home {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.home__card {
-  max-width: 450px;
-  height: max-content;
-  margin: 30px auto;
-  padding: 20px;
-}
 
 .postCard {
   margin: 10px auto;

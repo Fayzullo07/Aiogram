@@ -17,7 +17,7 @@ export default function SignIn() {
         M.toast({html: "Email manzilingizni to'g'ri kiriting", classes: "rounded #ff1744 red accent-3"});
         return
       }
-      fetch("http://localhost:5001/signUp", {
+      fetch("http://localhost:5001/signup", {
         method: "post",
         headers: {
           "Content-Type": "application/json"

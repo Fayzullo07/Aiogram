@@ -1,0 +1,36 @@
+.home {
+    width: 100%;
+    min-height: 90vh;
+    /* background: #555; */
+}
+
+.post__items {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    
+}
+
+.left__side {
+    min-height: 90vh;
+    background: #fff;
+}
+
+.home__card {
+    max-width: 450px;
+    height: max-content;
+    margin: 30px auto;
+    padding: 20px;
+  }
+
+.right__side {
+    width: 100%;
+    min-height: 90vh;
+    padding: 20px 15%;
+}
+
+.postedBy {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Grand Hotel', cursive;
+}
