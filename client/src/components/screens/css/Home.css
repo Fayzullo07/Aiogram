@@ -35,6 +35,10 @@
     margin: 0;
 }
 
+.like {
+    cursor: pointer;
+}
+
 @media screen and (max-width: 800px){
     .post__items {
         display: grid;
