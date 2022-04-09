@@ -2,9 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import "./css/Home.css";
 import HomeSideBar from "./HomeSideBar";
 import {UserContext} from "../../App";
+import M from "materialize-css";
 
 export default function Home() {
   const [data, setData] = useState([]);
+  const [showComments, setShowComments] = useState(false);
   const {state} = useContext(UserContext);
 
   useEffect(() => {
@@ -20,7 +22,7 @@ export default function Home() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [data]);
 
   const likePost = (id) => {
     fetch("http://localhost:5001/like", {
@@ -70,6 +72,27 @@ export default function Home() {
       console.log(err);
     })
   }
+
+  const commentPost = (text, postId) => {
+    fetch("http://localhost:5001/comments", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Fayzullo " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        postId,
+        text
+      })
+    }).then(res => res.json()).then((result) => {
+        if(result.error) {
+          M.toast({html: result.error, classes: 'rounded #ff1744 red accent-3'})
+        }
+        console.log(result)
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
   return (
     <div className="home">
       <div className="home">
@@ -102,11 +125,25 @@ export default function Home() {
 
                           )}
                         
-                          
-                            <p>{item.likes.length}</p>
+                            <i onClick={() => setShowComments(!showComments)} style={{color: "green"}} className="material-icons like" >comment</i>
+                            <p>{item.likes.length} likes</p>
                             <h4>{item.title}</h4>
                             <p>{item.body}</p>
-                            <input type="text" placeholder="add a comment" />
+                            {showComments? (
+                              item.comments.map(s => (
+                                <p key={s._id} >
+                                  <b>{s.postedBy.name}: </b> {s.text}
+                                </p>
+                              ))
+
+                            ):<p>Comments: {item.comments.length}</p>}
+                            <form onSubmit={(e) => {
+                              e.preventDefault();
+                              commentPost(e.target[0].value, item._id);
+                              e.target[0].value = "";
+                            }}>
+                              <input type="text" placeholder="add a comment" />
+                            </form>
                         </div>
                     </div>
                 )
