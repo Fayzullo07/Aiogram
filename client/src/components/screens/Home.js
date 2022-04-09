@@ -12,7 +12,6 @@ export default function Home() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setData(data.posts);
       })
       .catch((err) => {
@@ -24,10 +23,10 @@ export default function Home() {
       <div className="home">
         <div className="post__items">
           <div className="left__side">
-              <h2 style={{color: "#fff", fontFamily: "'Grand Hotel', cursive"}}>Maqolalar</h2>
             {data.map(item => {
                 return (
                     <div className="card home__card" key={item._id}>
+                        <h4 className="postedBy">{item.postedBy.name}</h4>
                         <div className="card-image">
                             <a href={item.photo} target="_blank"><img
                             src={item.photo}
@@ -35,7 +34,6 @@ export default function Home() {
                             /></a>
                         </div>
                         <div className="card-content">
-                        <h4 className="postedBy">{item.postedBy.name}</h4>
                             <i className="material-icons" style={{ color: "red" }}>
                             favorite
                             </i>

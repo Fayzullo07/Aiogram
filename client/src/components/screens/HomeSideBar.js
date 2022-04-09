@@ -28,7 +28,7 @@ export default function HomeSideBar() {
               </a>
             </div>
             <div className="card-content">
-            <h4 className="postedBy">{item.postedBy.name}</h4>
+            <h4 className="postedBy1">{item.postedBy.name}</h4>
               <b>{item.title}</b>
               <p>{item.body}</p>
             </div>

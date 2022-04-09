@@ -22,10 +22,16 @@
 }
 
 .postedBy {
-    text-align: center;
+    /* text-align: center; */
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-family: 'Grand Hotel', cursive;
+    padding: 10px;
+    /* font-family: 'Grand Hotel', cursive; */
+    margin: 0;
+}
+.postedBy1 {
+    text-align: center;
+    padding: 0;
     margin: 0;
 }
 
