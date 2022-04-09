@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import "./css/Home.css";
+import HomeSideBar from "./HomeSideBar";
+
 export default function Home() {
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -22,10 +24,10 @@ export default function Home() {
       <div className="home">
         <div className="post__items">
           <div className="left__side">
+              <h2 style={{color: "#fff", fontFamily: "'Grand Hotel', cursive"}}>Maqolalar</h2>
             {data.map(item => {
                 return (
                     <div className="card home__card" key={item._id}>
-                        <h4 className="postedBy">{item.postedBy.name}</h4>
                         <div className="card-image">
                             <a href={item.photo} target="_blank"><img
                             src={item.photo}
@@ -33,6 +35,7 @@ export default function Home() {
                             /></a>
                         </div>
                         <div className="card-content">
+                        <h4 className="postedBy">{item.postedBy.name}</h4>
                             <i className="material-icons" style={{ color: "red" }}>
                             favorite
                             </i>
@@ -42,26 +45,12 @@ export default function Home() {
                         </div>
                     </div>
                 )
-            })}
+            }).reverse()}
           </div>
           <div className="right__side">
-          <div className="card home__card">
-              <h4>Fayzullo</h4>
-              <div className="card-image">
-                <img
-                  src="https://images.unsplash.com/photo-1491466424936-e304919aada7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8d2FsbHBhcGVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                  alt="img"
-                />
-              </div>
-              <div className="card-content">
-                <i className="material-icons" style={{ color: "red" }}>
-                  favorite
-                </i>
-                <h6>Title</h6>
-                <p>It is my first post</p>
-                <input type="text" placeholder="add a comment" />
-              </div>
-            </div>
+          <h2 style={{color: "#fff", fontFamily: "'Grand Hotel', cursive"}}>Mening postlarim</h2>
+
+            <HomeSideBar/>
           </div>
         </div>
       </div>

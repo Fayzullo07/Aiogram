@@ -12,14 +12,8 @@
 
 .left__side {
     min-height: 90vh;
+    padding: 20px 15%;
 }
-
-.home__card {
-    max-width: 450px;
-    height: max-content;
-    margin: 30px auto;
-    padding: 20px;
-  }
 
 .right__side {
     width: 100%;
@@ -32,4 +26,17 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     font-family: 'Grand Hotel', cursive;
+    margin: 0;
+}
+
+@media screen and (max-width: 800px){
+    .post__items {
+        display: grid;
+        grid-template-columns: 100%;  
+    }
+
+    .right__side {
+        display: none;
+    }
+    
 }
