@@ -93,6 +93,20 @@ export default function Home() {
       console.log(err)
     })
   }
+
+  const deletePost = (postId) => {
+    fetch(`http://localhost:5001/deletepost/${postId}`, {
+      method: "delete",
+      headers: {
+        Authorization: "Fayzullo " + localStorage.getItem("jwt"),
+      }
+    }).then(res => res.json()).then((result) => {
+        console.log(result)
+        M.toast({html: result.msg, classes: "rounded #76ff03 light-green accent-3"});
+    }).catch((err) => {
+      console.log(err)
+    })
+  }
   return (
     <div className="home">
       <div className="home">
@@ -126,6 +140,9 @@ export default function Home() {
                           )}
                         
                             <i onClick={() => setShowComments(!showComments)} style={{color: "green"}} className="material-icons like" >comment</i>
+                            {item.postedBy._id === state._id && (
+                              <i onClick={() => deletePost(item._id)} style={{color: "red"}} className="material-icons like">delete_forever</i>
+                            )}
                             <p>{item.likes.length} likes</p>
                             <h4>{item.title}</h4>
                             <p>{item.body}</p>
