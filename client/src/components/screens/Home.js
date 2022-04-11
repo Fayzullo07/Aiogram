@@ -3,6 +3,7 @@ import "./css/Home.css";
 import HomeSideBar from "./HomeSideBar";
 import {UserContext} from "../../App";
 import M from "materialize-css";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -112,10 +113,12 @@ export default function Home() {
       <div className="home">
         <div className="post__items">
           <div className="left__side">
-            {data.map(item => {
+            {data ? data.map(item => {
                 return (
                     <div className="card home__card" key={item._id}>
-                        <h4 className="postedBy">{item.postedBy.name}</h4>
+                        <Link to={item.postedBy._id !== state._id ? `/profile/${item.postedBy._id}`: "/profile"}>
+                          <h4 className="postedBy">{item.postedBy.name}</h4>
+                        </Link>
                         <div className="card-image">
                             <a href={item.photo}><img
                             src={item.photo}
@@ -164,7 +167,7 @@ export default function Home() {
                         </div>
                     </div>
                 )
-            }).reverse()}
+            }).reverse() : "loading..."}
           </div>
           <div className="right__side">
           <h2 style={{color: "#fff", fontFamily: "'Grand Hotel', cursive"}}>Mening postlarim</h2>
