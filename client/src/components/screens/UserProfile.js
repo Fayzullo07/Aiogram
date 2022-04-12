@@ -24,6 +24,36 @@ const UserProfile = () => {
         });
     }, [profile]);
 
+  const followUser = () => {
+    fetch("http://localhost:5001/follow", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Fayzullo " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        followId: userId
+      })
+    }).then(res => res.json()).then(data => {
+      console.log(data);
+    })
+  }
+
+  const unFollowUser = () => {
+    fetch("http://localhost:5001/unfollow", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Fayzullo " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        unfollow: userId
+      })
+    }).then(res => res.json()).then(data => {
+      console.log(data);
+    })
+  }
+
   return (
     <>
     {!profile ? <Loader/> : (
@@ -43,6 +73,7 @@ const UserProfile = () => {
               <p>99 followes</p>
               <p>99 following</p>
             </div>
+            <button>Follow</button>
           </div>
         </div>
         <div className="gallery">
