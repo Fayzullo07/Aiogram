@@ -24,7 +24,7 @@ export default function Home() {
       .catch((err) => {
         console.log(err);
       });
-  }, [data]);
+  }, [data.posts]);
 
   const likePost = (id) => {
     fetch("http://localhost:5001/like", {
@@ -119,7 +119,7 @@ export default function Home() {
                   <div animateIn="fadeIn">
                     <div className="card home__card" key={item._id}>
                         <Link to={item.postedBy._id !== state._id ? `/profile/${item.postedBy._id}`: "/profile"}>
-                          <h4 className="postedBy">{item.postedBy.name}</h4>
+                          <h4 style={{color: "black"}} className="postedBy">{item.postedBy.name}</h4>
                         </Link>
                         <div className="card-image">
                             <a href={item.photo}><img

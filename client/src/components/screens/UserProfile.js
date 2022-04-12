@@ -4,9 +4,10 @@ import { useParams } from "react-router-dom";
 import Loader from "../Loader";
 
 const UserProfile = () => {
+  const {userId} = useParams();
   const [profile, setProfile] = useState(null);
   const { state, dispatch } = useContext(UserContext);
-  const {userId} = useParams();
+  const [showFollow, setShowFollow] = useState(state ? !state.following.includes(userId): true);
 
   useEffect(() => {
       fetch(`http://localhost:5001/user/${userId}`, {
@@ -22,7 +23,7 @@ const UserProfile = () => {
         .catch((err) => {
           console.log(err);
         });
-    }, [profile]);
+    }, [showFollow]);
 
   const followUser = () => {
     fetch("http://localhost:5001/follow", {
@@ -36,10 +37,19 @@ const UserProfile = () => {
       })
     }).then(res => res.json()).then(data => {
       console.log(data);
+      setShowFollow(!showFollow);
+      dispatch({type: "UPDATE", payload: {following: data.following, followers: data.followers}});
+      localStorage.setItem("user", JSON.stringify(data));
+      setProfile((prevState) => {
+        return {
+          ...prevState,
+          followers: [...prevState.user.followers, data._id ]
+        }
+      })
     })
   }
 
-  const unFollowUser = () => {
+  const unfollowUser = () => {
     fetch("http://localhost:5001/unfollow", {
       method: "put",
       headers: {
@@ -51,6 +61,16 @@ const UserProfile = () => {
       })
     }).then(res => res.json()).then(data => {
       console.log(data);
+      setShowFollow(!showFollow)
+      dispatch({type: "UPDATE", payload: {following: data.following, followers: data.followers}});
+      localStorage.setItem("user", JSON.stringify(data));
+      setProfile((prevState) => {
+        const newFollower = prevState.user.followers.filter((s) => s !== data._id);
+        return {
+          ...prevState,
+          followers: newFollower
+        }
+      })
     })
   }
 
@@ -70,10 +90,14 @@ const UserProfile = () => {
             <h4>{profile.user ? profile.user.name : "loading..."}</h4>
             <div className="infoProfile">
               <p>{profile.posts.length} posts</p>
-              <p>99 followes</p>
-              <p>99 following</p>
+              <p>{profile.user.followers.length} followes</p>
+              <p>{profile.user.following.length} following</p>
             </div>
-            <button>Follow</button>
+            {!showFollow ? (
+              <button style={{marginTop: 10}} className="btn" onClick={() => followUser()}>Follow</button>
+            ):(
+              <button style={{marginTop: 10}} className="btn" onClick={() => unfollowUser()}>Un Follow</button>
+            )}
           </div>
         </div>
         <div className="gallery">

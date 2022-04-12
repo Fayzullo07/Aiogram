@@ -15,7 +15,7 @@ export default function HomeSideBar() {
       .catch((err) => {
         console.log(err);
       });
-  }, [profile]);
+  }, []);
 
   return (
     <>
