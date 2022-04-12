@@ -4,6 +4,7 @@ import HomeSideBar from "./HomeSideBar";
 import {UserContext} from "../../App";
 import M from "materialize-css";
 import { Link } from "react-router-dom";
+import Loader from "../Loader";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -115,6 +116,7 @@ export default function Home() {
           <div className="left__side">
             {data ? data.map(item => {
                 return (
+                  <div animateIn="fadeIn">
                     <div className="card home__card" key={item._id}>
                         <Link to={item.postedBy._id !== state._id ? `/profile/${item.postedBy._id}`: "/profile"}>
                           <h4 className="postedBy">{item.postedBy.name}</h4>
@@ -166,8 +168,10 @@ export default function Home() {
                             </form>
                         </div>
                     </div>
+
+                  </div>
                 )
-            }).reverse() : "loading..."}
+            }).reverse() : <Loader/>}
           </div>
           <div className="right__side">
           <h2 style={{color: "#fff", fontFamily: "'Grand Hotel', cursive"}}>Mening postlarim</h2>

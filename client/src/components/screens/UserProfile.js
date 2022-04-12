@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../App";
 import { useParams } from "react-router-dom";
+import Loader from "../Loader";
 
 const UserProfile = () => {
   const [profile, setProfile] = useState(null);
@@ -25,7 +26,7 @@ const UserProfile = () => {
 
   return (
     <>
-    {!profile ? <h1>Loading</h1> : (
+    {!profile ? <Loader/> : (
       <div className="profile">
         <div className="profileMain">
           <div>

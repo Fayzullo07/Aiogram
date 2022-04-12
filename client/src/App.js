@@ -8,6 +8,7 @@ import "./App.css"
 import CreatePost from './components/screens/CreatePost';
 import { reducer, initialState } from './reducers/useReducer';
 import UserProfile from './components/screens/UserProfile';
+import "animate.css/animate.min.css";
 
 export const UserContext = createContext()
 
