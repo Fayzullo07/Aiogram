@@ -24,7 +24,7 @@ export default function Home() {
       .catch((err) => {
         console.log(err);
       });
-  }, [data.posts]);
+  }, [data]);
 
   const likePost = (id) => {
     fetch("http://localhost:5001/like", {
@@ -104,6 +104,8 @@ export default function Home() {
       }
     }).then(res => res.json()).then((result) => {
         console.log(result)
+        const newData = data.filter((s) => s._id !== result);
+        setData(newData);
         M.toast({html: result.msg, classes: "rounded #76ff03 light-green accent-3"});
     }).catch((err) => {
       console.log(err)

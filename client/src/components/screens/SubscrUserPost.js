@@ -24,7 +24,7 @@ export default function SubscrUserPost() {
       .catch((err) => {
         console.log(err);
       });
-  }, [data.posts]);
+  }, []);
 
   const likePost = (id) => {
     fetch("http://localhost:5001/like", {
