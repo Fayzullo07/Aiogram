@@ -9,6 +9,7 @@ import CreatePost from './components/screens/CreatePost';
 import { reducer, initialState } from './reducers/useReducer';
 import UserProfile from './components/screens/UserProfile';
 import "animate.css/animate.min.css";
+import SubscrUserPost from './components/screens/SubscrUserPost';
 
 export const UserContext = createContext()
 
@@ -32,6 +33,7 @@ const Routing = () => {
             <Route path='/profile' element={<Profile/>}/>
             <Route path='/createpost' element={<CreatePost/>}/>
             <Route path='/profile/:userId' element={<UserProfile/>}/>
+            <Route path='/myfollowerpost' element={<SubscrUserPost/>}/>
         </Route>
       </Routes>
   )

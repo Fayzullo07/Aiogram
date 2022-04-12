@@ -7,7 +7,7 @@ const UserProfile = () => {
   const {userId} = useParams();
   const [profile, setProfile] = useState(null);
   const { state, dispatch } = useContext(UserContext);
-  const [showFollow, setShowFollow] = useState(state ? !state.following.includes(userId): true);
+  const [showFollow, setShowFollow] = useState(state ? state.following.includes(userId): true);
 
   useEffect(() => {
       fetch(`http://localhost:5001/user/${userId}`, {
