@@ -52,4 +52,18 @@ router.put("/unfollow", login, (req, res) => {
     })
 })
 
+router.put("/updatephoto", login, (req, res) => {
+    User.findByIdAndUpdate(
+      req.user._id,
+      { $set: { photo: req.body.photo } },
+      { new: true },
+      (err, result) => {
+        if (err) {
+          return res.status(422).json({ err: "Picture can not posted" });
+        }
+        res.json(result);
+      }
+    );
+  });
+
 module.exports = router;

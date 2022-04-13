@@ -8,7 +8,6 @@ export default function Profile() {
   const { state, dispatch } = useContext(UserContext);
   const [showModal, setShowModal] = useState(false);
   const [image, setImage] = useState("");
-  const [url, setUrl] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:5001/mypost", {
@@ -26,24 +25,61 @@ export default function Profile() {
   }, []);
 
   useEffect(() => {
-    if(image){
+    if (image) {
       const data = new FormData();
       data.append("file", image);
       data.append("upload_preset", "Fayzullo");
       data.append("cloud_name", "du5hfz4yk");
       fetch("https://api.cloudinary.com/v1_1/du5hfz4yk/image/upload", {
         method: "post",
-        body: data
-      }).then(res => res.json()).then((data) => {
-        console.log(data)
-        setUrl(data.url);
-        localStorage.setItem("user", JSON.stringify({...state, photo: data.url}))
-        dispatch({type: "UPDATEPHOTO", payload: data.url})
-      }).catch((err) => {
-        console.log(err)
-      }) 
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          fetch("http://localhost:5001/updatephoto", {
+            method: "put",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Fayzullo " + localStorage.getItem("jwt"),
+            },
+            body: JSON.stringify({
+              photo: data.url,
+            }),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              localStorage.setItem(
+                "user",
+                JSON.stringify({ ...state, photo: result.photo })
+              );
+              dispatch({ type: "UPDATEPHOTO", payload: result.photo });
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-  }, [image])
+  }, [image]);
+
+  // useEffect(() => {
+  //   if(image){
+  //     const data = new FormData();
+  //     data.append("file", image);
+  //     data.append("upload_preset", "Fayzullo");
+  //     data.append("cloud_name", "du5hfz4yk");
+  //     fetch("https://api.cloudinary.com/v1_1/du5hfz4yk/image/upload", {
+  //       method: "post",
+  //       body: data
+  //     }).then(res => res.json()).then((data) => {
+  //       console.log(data)
+  //       setUrl(data.url);
+  //       localStorage.setItem("user", JSON.stringify({...state, photo: data.url}))
+  //       dispatch({type: "UPDATEPHOTO", payload: data.url})
+  //     }).catch((err) => {
+  //       console.log(err)
+  //     }) 
+  //   }
+  // }, [image])
 
   const updatePhoto = (file) => {
     setImage(file)
