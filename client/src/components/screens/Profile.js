@@ -99,8 +99,8 @@ export default function Profile() {
                 src={state ? state.photo: "Loading"}
                 alt="Profile_Photo"
               />
-              <div class="middleS">
-                <button onClick={() => setShowModal(true)} class="btn">
+              <div className="middleS">
+                <button onClick={() => setShowModal(true)} className="btn">
                   <i className="material-icons">add_a_photo</i>
                 </button>
               </div>
@@ -148,14 +148,14 @@ export default function Profile() {
                 <h4>Add Your Account Photo</h4>
               </div>
               <div className="modalContent">
-                <div class="file-field input-field">
-                  <div class="btn">
+                <div className="file-field input-field">
+                  <div className="btn">
                   <i className="material-icons">add_a_photo</i>
                     <input type="file" onChange={(e) => updatePhoto(e.target.files[0])} />
                   </div>
-                  <div class="file-path-wrapper">
+                  <div className="file-path-wrapper">
                     <input
-                      class="file-path validate"
+                      className="file-path validate"
                       type="text"
                       placeholder="Upload one or more files"
                     />

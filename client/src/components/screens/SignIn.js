@@ -112,14 +112,14 @@ export default function SignIn() {
             <div className="formBx">
               <div className="form">
                 <h2 style={{ margin: 0 }}>Ro'yhatdan o'tish</h2>
-                <div class="containers">
+                <div className="containers">
                   <img
                     src="https://res.cloudinary.com/du5hfz4yk/image/upload/v1649849712/3f9470b34a8e3f526dbdb022f9f19cf7_uis4gs.jpg"
                     alt="Avatar"
-                    class="images"
+                    className="images"
                   />
-                  <div class="middles">
-                    <button onClick={() => setShowModal(true)} class="btn">
+                  <div className="middles">
+                    <button onClick={() => setShowModal(true)} className="btn">
                       <i className="material-icons">add_a_photo</i>
                     </button>
                   </div>
@@ -179,14 +179,14 @@ export default function SignIn() {
                 <h4>Add Your Account Photo</h4>
               </div>
               <div className="modalContent">
-                <div class="file-field input-field">
-                  <div class="btn">
+                <div className="file-field input-field">
+                  <div className="btn">
                   <i className="material-icons">add_a_photo</i>
                     <input type="file" onChange={(e) => setImage(e.target.files[0])} />
                   </div>
-                  <div class="file-path-wrapper">
+                  <div className="file-path-wrapper">
                     <input
-                      class="file-path validate"
+                      className="file-path validate"
                       type="text"
                       placeholder="Upload one or more files"
                     />
