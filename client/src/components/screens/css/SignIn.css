@@ -137,6 +137,64 @@ section {
   left: -100%;
 }
 
+.containers {
+  position: relative;
+  width: 100%;
+}
+
+.images {
+  opacity: 1;
+  display: block;
+  width: 125px;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.middles {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.containers:hover .images {
+  opacity: 0.3;
+}
+
+.containers:hover .middles {
+  opacity: 1;
+}
+
+.modal1 {
+  position: fixed;
+  width: 100%;
+  height: 120vh;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 99999999;
+}
+
+.modal_content1 {
+  width: 50%;
+  padding: 30px;
+  margin: 100px auto;
+  background: #fff;
+}
+
+.modalHeader {
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
 @media (max-width: 991px) {
   section .container {
     max-width: 400px;
