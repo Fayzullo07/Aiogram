@@ -94,3 +94,36 @@
   top: -15px;
   left: 9px;
 }
+
+.how {
+  position: relative;
+}
+
+.middleS {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.how:hover .profileImg {
+  opacity: 0.3;
+}
+
+.how:hover .middleS {
+  opacity: 1;
+}
+
+.modal2 {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 99999999;
+  top: 0;
+}
+
