@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./css/SignIn.css";
 import M from "materialize-css";
@@ -12,8 +12,11 @@ export default function SignIn() {
   const [logPassword, setLogPassword] = useState("");
   const [clicked, setClicked] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [image, setImage] = useState("");
+  const [url, setUrl] = useState("");
 
-  const postData = () => {
+
+  const ourFields = () => {
     if (
       !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         regEmail
@@ -34,6 +37,7 @@ export default function SignIn() {
         name: regName,
         email: regEmail,
         password: regPassword,
+        pic: url
       }),
     })
       .then((res) => res.json())
@@ -51,8 +55,37 @@ export default function SignIn() {
           setClicked(!clicked);
         }
       });
+  }
+  
+  const uploadPicture = () => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "Fayzullo");
+    data.append("cloud_name", "du5hfz4yk");
+    fetch("https://api.cloudinary.com/v1_1/du5hfz4yk/image/upload", {
+      method: "post",
+      body: data
+    }).then(res => res.json()).then((data) => {
+      console.log(data)
+      setUrl(data.url);
+    }).catch((err) => {
+      console.log(err)
+    }) 
+  }
+  
+  const postData = () => {
+    if(image) {
+      uploadPicture();
+    } else {
+      ourFields();
+    }
   };
 
+  useEffect(() => {
+    if(url){
+      ourFields();
+    }
+  }, [url]);
   return (
     <>
       <section>
@@ -133,8 +166,8 @@ export default function SignIn() {
           </div>
         </div>
         {showModal ? (
-          <div className="modal1">
-            <div className="modal_content1">
+          <div className="modal1" onClick={() => setShowModal(false)}>
+            <div className="modal_content1" onClick={(e) => e.stopPropagation()}>
               <div className="modalHeader">
                 <i
                   style={{ cursor: "pointer" }}
@@ -149,7 +182,7 @@ export default function SignIn() {
                 <div class="file-field input-field">
                   <div class="btn">
                   <i className="material-icons">add_a_photo</i>
-                    <input type="file" multiple />
+                    <input type="file" onChange={(e) => setImage(e.target.files[0])} />
                   </div>
                   <div class="file-path-wrapper">
                     <input
@@ -159,6 +192,9 @@ export default function SignIn() {
                     />
                   </div>
                 </div>
+              </div>
+              <div className="modalFooter">
+                <button className="btn" onClick={() => setShowModal(false)}>Save Image</button>
               </div>
             </div>
           </div>
